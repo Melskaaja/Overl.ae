@@ -1,0 +1,89 @@
+/* Default styles */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+  color: var(--oae-color-tan);
+  margin-top: 1em;
+  margin-bottom: 0.6em;
+}
+
+h1 {
+  font-family: var(--oae-font-pretty);
+  font-size: 3.2em;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h2, h3 {
+  font-family: var(--oae-font-heading);
+}
+
+h2 {
+  font-size: 2.6em;
+}
+
+h3 {
+  font-size: 1.7em;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-family: var(--oae-font-narrow);
+  font-size: 1.15em;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a, a:active, a:visited {
+  color: var(--oae-color-white-green);
+
+  &:hover {
+    color: var(--oae-color-light-green);
+  }
+}
+
+ul {
+  margin: 0.4em 0;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+p, ul {
+  margin-bottom: 0.8em;
+}
+
+button,
+.fake-button,
+input:not([type="radio"]):not([type="checkbox"]) {
+  padding: 0.8em !important;
+  border-radius: 1.5em;
+  margin: 0.5em;
+}
+
+button, .fake-button {
+  background-color: var(--oae-color-white-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover, &:active {
+    background-color: var(--oae-color-light-green);
+    cursor: pointer;
+  }
+
+  > .fa, .material-symbols-outlined {
+    color: var(--oae-color-dark-green);
+  }
+}

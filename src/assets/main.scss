@@ -1,0 +1,82 @@
+@import 'app-vars';
+@import 'app-reset';
+@import 'vue3-toastify/dist/index.css';
+
+:root {
+  --toastify-font-family: var(--oae-font-narrow);
+}
+
+body {
+  background-color: var(--oae-color-dull-gray);
+  font-family: var(--oae-font-regular), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--oae-default);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+}
+
+#app {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 1em;
+  border: 2px outset var(--oae-color-french-gray);
+
+  .card-header,
+  .card-footer {
+    padding: 0.3em 1em;
+    background-color: var(--oae-color-dark-gray);
+  }
+  .card-header {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom: 1px solid var(--oae-color-french-gray);
+  }
+  .card-body {
+    flex: 1;
+    padding: 0.6em 1em;
+  }
+  .card-footer {
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-top: 1px solid var(--oae-color-french-gray);
+  }
+}
+
+.inline-icon .material-symbols-outlined {
+  margin: 0;
+  font-size: 0.8em;
+}
+
+.text-danger {
+  color: var(--oae-color-danger);
+}
+
+.strike {
+  text-decoration: line-through;
+  font-family: var(--oae-font-narrow);
+}
+
+@import 'overlay';
