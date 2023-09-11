@@ -48,7 +48,7 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
   let query = [];
   if (values[3]) query.push('at=' + values[4]);
   if (values[5]) query.push('p=' + values[6]);
-  finalUrl.value = 'https://overl.ae/timer/' + newSeconds + (query.length ? '?' + query.join('&') : '');
+  finalUrl.value = 'https://ovrly.me/timer/' + newSeconds + (query.length ? '?' + query.join('&') : '');
 });
 </script>
 
@@ -59,7 +59,7 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
     <p>This is for you when you need a timer to run on your stream for a length of time of your choosing. 
       You can also set the time that it needs to start - no more forgetting to start timers for events! (I guess that's only 
       useful if your event starts at a very specific time..) Here's a minimal example: 
-      <em><RouterLink to="/timer/20" target="_blank">https://overl.ae/timer/20</RouterLink></em></p>
+      <em><RouterLink to="/timer/20" target="_blank">https://ovrly.me/timer/20</RouterLink></em></p>
 
     <h3><em>URL</em> Generator</h3>
 

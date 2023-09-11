@@ -3,7 +3,7 @@
 
 <template>
   <section>
-    <h1>Overl.ae &ndash; Quick and Easy Overlays</h1>
+    <h1>Ovrly.me &ndash; Quick and Easy Overlays</h1>
 
     <p>Ever host an online tournament but your audience can't tell who's playing?</p>
 
@@ -29,7 +29,7 @@
       of your stream in the settings of your streaming software!
     </p>
 
-    <h3>Future of Overl.ae</h3>
+    <h3>Future of Ovrly.me</h3>
 
     <ul>
       <li><span class="strike">timestamp/link maker for timer and countdown</span></li>

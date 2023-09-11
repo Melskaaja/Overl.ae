@@ -47,7 +47,7 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
   let query = [];
   if (values[3]) query.push('at=' + values[4]);
   if (values[5]) query.push('p=' + values[6]);
-  finalUrl.value = 'https://overl.ae/countdown/' + newSeconds + (query.length ? '?' + query.join('&') : '');
+  finalUrl.value = 'https://ovrly.me/countdown/' + newSeconds + (query.length ? '?' + query.join('&') : '');
 });
 </script>
 
@@ -62,7 +62,7 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
       always continue from the time it should be at.
     </p>
 
-    <p>Here's a minimal example: <em><RouterLink to="/countdown/20" target="_blank">https://overl.ae/countdown/120</RouterLink></em></p>
+    <p>Here's a minimal example: <em><RouterLink to="/countdown/20" target="_blank">https://ovrly.me/countdown/120</RouterLink></em></p>
 
     <h3><em>URL</em> Generator</h3>
 

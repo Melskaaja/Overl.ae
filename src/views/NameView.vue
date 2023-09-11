@@ -32,7 +32,7 @@ watch([nickname, pronouns, addPos, position, addServ, service], (values) => {
   let query = [];
   if (values[4]) query.push('s=' + values[5]);
   if (values[2]) query.push('p=' + values[3]);
-  finalUrl.value = 'https://overl.ae/name/' + nickname + (pronouns.length ? '/' + pronouns : '') + (query.length ? '?' + query.join('&') : '');
+  finalUrl.value = 'https://ovrly.me/name/' + nickname + (pronouns.length ? '/' + pronouns : '') + (query.length ? '?' + query.join('&') : '');
 });
 </script>
 
@@ -41,7 +41,7 @@ watch([nickname, pronouns, addPos, position, addServ, service], (values) => {
     <h1>Name Overlay</h1>
 
     <p>If it looks familiar, it's because I made the one on the MSL website, too! Here's the basic example: 
-      <em><RouterLink to="/name/YourNickname" target="_blank">https://overl.ae/name/YourNickname</RouterLink></em>. 
+      <em><RouterLink to="/name/YourNickname" target="_blank">https://ovrly.me/name/YourNickname</RouterLink></em>. 
       Simple, efficient, non-intrusive. But there's a few extra bits you can add to make it better..  
     </p>
 
