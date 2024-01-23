@@ -54,12 +54,18 @@ const updateTimer = () => {
   setTimeout(updateTimer, 1000);
 }
 
+let font = 'fti';
+if ($route.query.f) {
+  font = $route.query.f ?? 'fti';
+}
+
 // when the page loads, make sure there are no colors before initializing timer
 onMounted(() => {
   window.document.body.classList.remove('warn');
   window.document.body.classList.remove('done');
   window.document.body.classList.add('overlay');
   window.document.body.classList.add(position);
+  window.document.body.classList.add(font);
   updateTimer();
 });
 </script>

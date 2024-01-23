@@ -43,11 +43,20 @@ watch([rollMinAt, rollHourAt, rollDayAt, rollMonthAt, rollYearAt], (values) => {
   rollTimestampAt.value = Math.floor(newTimestamp / 1000);
 });
 
-watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, position], (values) => {
+const changeFont = ref(false);
+const font = ref('fti');
+const availableFonts = {
+  fti: 'Titillium (default)',
+  fmt: 'Minecraft (title)',
+  fmc: 'Minecraft (chat)'
+}
+
+watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, position, changeFont, font], (values) => {
   let newSeconds = (values[0] * 60 * 60) + (values[1] * 60) + values[2];
   let query = [];
   if (values[3]) query.push('at=' + values[4]);
   if (values[5]) query.push('p=' + values[6]);
+  if (values[7]) query.push('f=' + values[8]);
   finalUrl.value = 'https://ovrly.me/timer/' + newSeconds + (query.length ? '?' + query.join('&') : '');
 });
 </script>
@@ -103,6 +112,20 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
         <NumberRoller :min="new Date().getFullYear()" :max="new Date().getFullYear() + 1" v-model="rollYearAt"></NumberRoller>
       </div>
     </div>
+
+    <p>
+      <input type="checkbox" v-model="changeFont" id="changeFont"/>
+      <label for="changeFont">Change the overlay font?</label>
+    </p>
+
+    <p v-if="changeFont">
+      <ul class="fontList">
+        <li v-for="(label, code) in availableFonts" :key="code">
+          <input type="radio" name="font" v-model="font" :id="'font_'+code" :value="code"/>
+          <label :for="'font_'+code" v-html="label"></label>
+        </li>
+      </ul>
+    </p>
 
     <p>
       Your overlay URL:
@@ -170,7 +193,8 @@ input[type="radio"] {
   }
 }
 
-ul.positionList {
+ul.positionList,
+ul.fontList {
   display: flex;
   flex-flow: row wrap;
   align-items: start;

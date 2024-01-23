@@ -33,9 +33,15 @@ if ($route.query) {
   }
 }
 
+let font = 'fti';
+if ($route.query.f) {
+  font = $route.query.f ?? 'fti';
+}
+
 onMounted(() => {
   window.document.body.classList.add('overlay');
   window.document.body.classList.add(position);
+  window.document.body.classList.add(font);
 });
 </script>
 

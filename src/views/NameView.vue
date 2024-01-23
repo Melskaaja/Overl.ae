@@ -26,12 +26,21 @@ const availableServices = {
   yt: 'YouTube'
 }
 
-watch([nickname, pronouns, addPos, position, addServ, service], (values) => {
+const changeFont = ref(false);
+const font = ref('fti');
+const availableFonts = {
+  fti: 'Titillium (default)',
+  fmt: 'Minecraft (title)',
+  fmc: 'Minecraft (chat)'
+}
+
+watch([nickname, pronouns, addPos, position, addServ, service, changeFont, font], (values) => {
   let nickname = values[0].replace(/\W/g, '');
   let pronouns = values[1].replaceAll('/', '-').replace(/[^\w-]/g, '');
   let query = [];
   if (values[4]) query.push('s=' + values[5]);
   if (values[2]) query.push('p=' + values[3]);
+  if (values[6]) query.push('f=' + values[7]);
   finalUrl.value = 'https://ovrly.me/name/' + nickname + (pronouns.length ? '/' + pronouns : '') + (query.length ? '?' + query.join('&') : '');
 });
 </script>
@@ -76,6 +85,20 @@ watch([nickname, pronouns, addPos, position, addServ, service], (values) => {
         <li v-for="(label, code) in availablePositions" :key="code">
           <input type="radio" name="position" v-model="position" :id="'position_'+code" :value="code"/>
           <label :for="'position_'+code" v-html="label"></label>
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      <input type="checkbox" v-model="changeFont" id="changeFont"/>
+      <label for="changeFont">Change the overlay font?</label>
+    </p>
+
+    <p v-if="changeFont">
+      <ul class="fontList">
+        <li v-for="(label, code) in availableFonts" :key="code">
+          <input type="radio" name="font" v-model="font" :id="'font_'+code" :value="code"/>
+          <label :for="'font_'+code" v-html="label"></label>
         </li>
       </ul>
     </p>
@@ -137,7 +160,8 @@ input[type="radio"] {
 }
 
 ul.serviceList,
-ul.positionList {
+ul.positionList,
+ul.fontList {
   display: flex;
   flex-flow: row wrap;
   align-items: start;

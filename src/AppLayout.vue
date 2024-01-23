@@ -50,7 +50,7 @@ if (isAuthenticated) {
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/app-vars';
+@import '@/assets/css/app-vars';
 
 header {
   width: 100%;
