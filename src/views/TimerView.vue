@@ -1,7 +1,9 @@
 <script setup>
 import { watch, ref } from 'vue'
+import FontSelector from '@/components/FontSelector.vue'
 import MSOIcon from '@/components/icons/MSOIcon.vue'
-import NumberRoller from '../components/NumberRoller.vue'
+import NumberRoller from '@/components/NumberRoller.vue'
+import PositionSelector from '@/components/PositionSelector.vue'
 
 const finalUrl = ref('');
 
@@ -13,14 +15,6 @@ const rollSecTime = ref(30);
 
 const addPos = ref(false);
 const position = ref('tc');
-const availablePositions = {
-  tl: 'Top left',
-  tc: 'Top center (default)',
-  tr: 'Top right',
-  bl: 'Bottom left',
-  bc: 'Bottom center',
-  br: 'Bottom right'
-}
 
 const addAt = ref(false);
 const now = new Date();
@@ -44,12 +38,7 @@ watch([rollMinAt, rollHourAt, rollDayAt, rollMonthAt, rollYearAt], (values) => {
 });
 
 const changeFont = ref(false);
-const font = ref('fti');
-const availableFonts = {
-  fti: 'Titillium (default)',
-  fmt: 'Minecraft (title)',
-  fmc: 'Minecraft (chat)'
-}
+const font = ref('fbl');
 
 watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, position, changeFont, font], (values) => {
   let newSeconds = (values[0] * 60 * 60) + (values[1] * 60) + values[2];
@@ -83,20 +72,6 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
     </div>
 
     <p>
-      <input type="checkbox" v-model="addPos" id="addPos"/>
-      <label for="addPos">Set timer's on-screen position?</label>
-    </p>
-
-    <p v-if="addPos">
-      <ul class="positionList">
-        <li v-for="(label, code) in availablePositions" :key="code">
-          <input type="radio" name="position" v-model="position" :id="'position_'+code" :value="code"/>
-          <label :for="'position_'+code" v-html="label"></label>
-        </li>
-      </ul>
-    </p>
-
-    <p>
       <input type="checkbox" v-model="addAt" id="addAt"/>
       <label for="addAt">Start timer at a certain time? (Roller timezone is your browser's timezone, {{ userTZ }})</label>
     </p>
@@ -114,18 +89,19 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
     </div>
 
     <p>
+      <input type="checkbox" v-model="addPos" id="addPos"/>
+      <label for="addPos">Set timer's on-screen position?</label>
+    </p>
+
+    <PositionSelector v-if="addPos" v-model="position" />
+
+    <p>
       <input type="checkbox" v-model="changeFont" id="changeFont"/>
       <label for="changeFont">Change the overlay font?</label>
     </p>
 
-    <p v-if="changeFont">
-      <ul class="fontList">
-        <li v-for="(label, code) in availableFonts" :key="code">
-          <input type="radio" name="font" v-model="font" :id="'font_'+code" :value="code"/>
-          <label :for="'font_'+code" v-html="label"></label>
-        </li>
-      </ul>
-    </p>
+    <FontSelector v-if="changeFont" v-model="font"/>
+    
 
     <p>
       Your overlay URL:
@@ -190,18 +166,6 @@ input[type="radio"] {
 
   div:not(.number-roller) {
     margin-left: 1em;
-  }
-}
-
-ul.positionList,
-ul.fontList {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: start;
-
-  li {
-    list-style: none;
-    flex: 0 1 33%;
   }
 }
 </style>

@@ -1,6 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue'
+import FontSelector from '@/components/FontSelector.vue'
 import MSOIcon from '@/components/icons/MSOIcon.vue'
+import PositionSelector from '@/components/PositionSelector.vue'
 
 const finalUrl = ref('');
 const selectFinalUrl = () => document.querySelector('.final-url').select();
@@ -10,14 +12,6 @@ const pronouns = ref('');
 
 const addPos = ref(false);
 const position = ref('tl');
-const availablePositions = {
-  tl: 'Top left (default)',
-  tc: 'Top center',
-  tr: 'Top right',
-  bl: 'Bottom left',
-  bc: 'Bottom center',
-  br: 'Bottom right'
-}
 
 const addServ = ref(false);
 const service = ref('tw');
@@ -27,12 +21,7 @@ const availableServices = {
 }
 
 const changeFont = ref(false);
-const font = ref('fti');
-const availableFonts = {
-  fti: 'Titillium (default)',
-  fmt: 'Minecraft (title)',
-  fmc: 'Minecraft (chat)'
-}
+const font = ref('fbl');
 
 watch([nickname, pronouns, addPos, position, addServ, service, changeFont, font], (values) => {
   let nickname = values[0].replace(/\W/g, '');
@@ -80,28 +69,14 @@ watch([nickname, pronouns, addPos, position, addServ, service, changeFont, font]
       <label for="addPos">Set on-screen position of text?</label>
     </p>
 
-    <p v-if="addPos">
-      <ul class="positionList">
-        <li v-for="(label, code) in availablePositions" :key="code">
-          <input type="radio" name="position" v-model="position" :id="'position_'+code" :value="code"/>
-          <label :for="'position_'+code" v-html="label"></label>
-        </li>
-      </ul>
-    </p>
+    <PositionSelector v-if="addPos" v-model="position" />
 
     <p>
       <input type="checkbox" v-model="changeFont" id="changeFont"/>
       <label for="changeFont">Change the overlay font?</label>
     </p>
 
-    <p v-if="changeFont">
-      <ul class="fontList">
-        <li v-for="(label, code) in availableFonts" :key="code">
-          <input type="radio" name="font" v-model="font" :id="'font_'+code" :value="code"/>
-          <label :for="'font_'+code" v-html="label"></label>
-        </li>
-      </ul>
-    </p>
+    <FontSelector v-if="changeFont" v-model="font" />
 
     <p>
       Your overlay URL:
@@ -126,9 +101,9 @@ watch([nickname, pronouns, addPos, position, addServ, service, changeFont, font]
           <li v-for="(label, code) in availableServices" :key="code"><strong>s={{ code }}</strong> - {{ label }}</li>
         </ul>
       </li>
-      <li>Text position on screen (query parameter): 
+      <li>Text position on screen (query parameter): either <strong>t</strong> or <strong>b</strong> for top/bottom, then <strong>l</strong>, <strong>c</strong> or <strong>r</strong> for left/center/right
         <ul>
-          <li v-for="(label, code) in availablePositions" :key="code"><strong>p={{ code }}</strong> - {{ label }}</li>
+          <li><strong>p=tl</strong> - Top left (default)</li>
         </ul>
       </li>
     </ul>
@@ -159,9 +134,7 @@ input[type="radio"] {
   }
 }
 
-ul.serviceList,
-ul.positionList,
-ul.fontList {
+ul.serviceList {
   display: flex;
   flex-flow: row wrap;
   align-items: start;

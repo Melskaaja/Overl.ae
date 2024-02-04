@@ -11,7 +11,7 @@ let pronouns = '';
 if ($route.params) {
   if ($route.params.pronouns) {
     // streamlabs doesn't know what replaceAll is
-    let parts = $route.params.pronouns?.toUpperCase().split('-');
+    let parts = $route.params.pronouns?.toLowerCase().split('-');
     pronouns = parts.join('/');
   }
 }
@@ -33,9 +33,9 @@ if ($route.query) {
   }
 }
 
-let font = 'fti';
+let font = 'fbl';
 if ($route.query.f) {
-  font = $route.query.f ?? 'fti';
+  font = $route.query.f ?? 'fbl';
 }
 
 onMounted(() => {

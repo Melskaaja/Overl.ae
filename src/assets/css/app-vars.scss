@@ -1,5 +1,5 @@
 /** 
- *  font            | usage         | weight + style
+ *  google fonts    | usage         | weight + style
  * -----------------|---------------|----------------------
  *  Alumni Sans     | narrow        | 200/400/700 + italic
  *  Fleur De Leah   | flowery deco  | 400/700
@@ -8,8 +8,27 @@
  *  Style Script    | decoration    | 400
  *  Titillium Web   | regular       | 200/400/700 + italic
  */
-
 @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&family=Fleur+De+Leah&family=Karantina:wght@300;700&family=Style+Script&family=Titillium+Web:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&family=Unica+One&family=Material+Symbols+Outlined:wght@300&display=swap');
+
+/**
+ *  outside fonts   | usage         
+ * -----------------|------------------
+ *  Blockletter     | heavy title
+ *  Minecraft       | monospace
+ *  Minecraft Fifty | monospace, title
+*/
+@font-face {
+  font-family: 'Blockletter';
+  src: url('../fonts/Blockletter.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../fonts/Minecraft-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Minecraft Fifty';
+  src: url('../fonts/MinecraftFifty-Solid.otf') format('opentype');
+}
 
 :root {
   
@@ -40,8 +59,8 @@
   --oae-font-narrow: 'Alumni Sans';
   --oae-font-pretty: 'Fleur De Leah';
   --oae-font-heading: 'Style Script';
-  --oae-font-overlay: 'Karantina';
-
+  --oae-font-block: 'Karantina';
+  --oae-font-overlay: 'Blockletter';
 }
 
 /* Responsive breakpoints */

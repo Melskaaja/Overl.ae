@@ -50,9 +50,9 @@ const updateTimer = () => {
   setTimeout(updateTimer, 1000);
 }
 
-let font = 'fti';
+let font = 'fbl';
 if ($route.query.f) {
-  font = $route.query.f ?? 'fti';
+  font = $route.query.f ?? 'fbl';
 }
 
 // when the page loads, make sure there are no colors before initializing countdown

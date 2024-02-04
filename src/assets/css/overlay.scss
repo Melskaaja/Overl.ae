@@ -1,4 +1,8 @@
 @font-face {
+  font-family: 'Blockletter';
+  src: url('../fonts/Blockletter.otf') format('opentype');
+}
+@font-face {
   font-family: 'Minecraft';
   src: url('../fonts/Minecraft-Regular.otf') format('opentype');
 }
@@ -29,8 +33,12 @@ body.overlay {
     font-weight: 700;
     font-size: 10vh;
     line-height: .75em;
-    -webkit-text-stroke-width: 0.45vh;
+    -webkit-text-stroke-width: 0.1vh;
     -webkit-text-stroke-color: var(--oae-color-dark-gray);
+    
+    .pronouns {
+      -webkit-text-stroke-width: 0.15vh;
+    }
 
     display: flex;
     background-color: transparent !important;
@@ -70,12 +78,25 @@ body.overlay {
     color: var(--oae-color-danger);
   }
 
+  &.fka #app .main {
+    font-family: var(--oae-font-block), serif;
+    -webkit-text-stroke-width: 0.45vh;
+    .pronouns {
+      -webkit-text-stroke-width: 0.4vh;
+    }
+  }
   &.fmc #app .main {
     font-family: 'Minecraft', monospace;
-    -webkit-text-stroke-width: 0.25vh;
+    -webkit-text-stroke-width: 0.1vh;
+    .pronouns {
+      -webkit-text-stroke-width: 0.15vh;
+    }
   }
   &.fmt #app .main {
     font-family: 'Minecraft Fifty', monospace;
-    -webkit-text-stroke-width: 0.35vh;
+    -webkit-text-stroke-width: 0.45vh;
+    .pronouns {
+      -webkit-text-stroke-width: 0.4vh;
+    }
   }
 }

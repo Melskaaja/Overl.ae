@@ -1,7 +1,9 @@
 <script setup>
 import { watch, ref } from 'vue'
+import FontSelector from '@/components/FontSelector.vue'
 import MSOIcon from '@/components/icons/MSOIcon.vue'
-import NumberRoller from '../components/NumberRoller.vue'
+import NumberRoller from '@/components/NumberRoller.vue'
+import PositionSelector from '@/components/PositionSelector.vue'
 
 const finalUrl = ref('');
 const selectFinalUrl = () => document.querySelector('.final-url').select();
@@ -9,17 +11,6 @@ const selectFinalUrl = () => document.querySelector('.final-url').select();
 const rollHourTime = ref(0);
 const rollMinTime = ref(1);
 const rollSecTime = ref(30);
-
-const addPos = ref(false);
-const position = ref('tc');
-const availablePositions = {
-  tl: 'Top left',
-  tc: 'Top center (default)',
-  tr: 'Top right',
-  bl: 'Bottom left',
-  bc: 'Bottom center',
-  br: 'Bottom right'
-}
 
 const addAt = ref(false);
 const now = new Date();
@@ -31,13 +22,11 @@ const rollDayAt = ref(now.getDate());
 const rollMonthAt = ref(now.getMonth() + 1); // WHY
 const rollYearAt = ref(now.getFullYear());
 
+const addPos = ref(false);
+const position = ref('tc');
+
 const changeFont = ref(false);
-const font = ref('fti');
-const availableFonts = {
-  fti: 'Titillium (default)',
-  fmt: 'Minecraft (title)',
-  fmc: 'Minecraft (chat)'
-}
+const font = ref('fbl');
 
 const rollTimestampAt = ref(Math.floor(now.getTime() / 1000));
 const userTZOffset = now.getTimezoneOffset();
@@ -86,20 +75,6 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
     </div>
 
     <p>
-      <input type="checkbox" v-model="addPos" id="addPos"/>
-      <label for="addPos">Set countdown's on-screen position?</label>
-    </p>
-
-    <p v-if="addPos">
-      <ul class="positionList">
-        <li v-for="(label, code) in availablePositions" :key="code">
-          <input type="radio" name="position" v-model="position" :id="'position_'+code" :value="code"/>
-          <label :for="'position_'+code" v-html="label"></label>
-        </li>
-      </ul>
-    </p>
-
-    <p>
       <input type="checkbox" v-model="addAt" id="addAt"/>
       <label for="addAt">Start countdown at a certain time? (Roller timezone is {{ userTZ }})</label>
     </p>
@@ -117,18 +92,18 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
     </div>
 
     <p>
+      <input type="checkbox" v-model="addPos" id="addPos"/>
+      <label for="addPos">Set countdown's on-screen position?</label>
+    </p>
+
+    <PositionSelector v-if="addPos" v-model="position" />
+
+    <p>
       <input type="checkbox" v-model="changeFont" id="changeFont"/>
       <label for="changeFont">Change the overlay font?</label>
     </p>
 
-    <p v-if="changeFont">
-      <ul class="fontList">
-        <li v-for="(label, code) in availableFonts" :key="code">
-          <input type="radio" name="font" v-model="font" :id="'font_'+code" :value="code"/>
-          <label :for="'font_'+code" v-html="label"></label>
-        </li>
-      </ul>
-    </p>
+    <FontSelector v-if="changeFont" v-model="font" />
 
     <p>
       Your overlay URL:
@@ -146,9 +121,9 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
           <li><strong>at=1704110400</strong> - start at 12pm GMT on Jan 1st, 2024</li>
         </ul>
       </li>
-      <li>Countdown position on fullscreen (query parameter):
+      <li>Text position on screen (query parameter): either <strong>t</strong> or <strong>b</strong> for top/bottom, then <strong>l</strong>, <strong>c</strong> or <strong>r</strong> for left/center/right
         <ul>
-          <li v-for="(label, code) in availablePositions" :key="code"><strong>p={{ code }}</strong> - {{ label }}</li>
+          <li><strong>p=tl</strong> - Top left (default)</li>
         </ul>
       </li>
     </ul>
@@ -193,18 +168,6 @@ input[type="radio"] {
 
   div:not(.number-roller) {
     margin-left: 1em;
-  }
-}
-
-ul.positionList,
-ul.fontList {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: start;
-
-  li {
-    list-style: none;
-    flex: 0 1 33%;
   }
 }
 </style>

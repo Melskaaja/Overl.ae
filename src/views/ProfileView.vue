@@ -39,10 +39,10 @@ query GetGroups {
       <div class="card-body">
 
         <div v-if="group.group_timers">There's {{group.group_timers.length }} timers!</div>
-        <div v-else>No timers..</div>
+        <div v-else>No timers.</div>
 
         <div v-if="group.group_countdowns">There's {{group.group_countdowns.length }} countdowns!</div>
-        <div v-else>No countdowns..</div>
+        <div v-else>No countdowns.</div>
 
       </div>
     </div>
