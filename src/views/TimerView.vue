@@ -120,9 +120,9 @@ watch([rollHourTime, rollMinTime, rollSecTime, addAt, rollTimestampAt, addPos, p
           <li><strong>at=1704110400</strong> - start at 12pm GMT on Jan 1st, 2024</li>
         </ul>
       </li>
-      <li>Timer's default position on the screen (query parameter):
+      <li>Text position on screen (query parameter): either <strong>t</strong> or <strong>b</strong> for top/bottom, then <strong>l</strong>, <strong>c</strong> or <strong>r</strong> for left/center/right
         <ul>
-          <li v-for="(label, code) in availablePositions" :key="code"><strong>p={{ code }}</strong> - {{ label }}</li>
+          <li><strong>p=tl</strong> - Top left (default)</li>
         </ul>
       </li>
     </ul>

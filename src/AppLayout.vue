@@ -1,38 +1,16 @@
 <script setup>
-import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { useAuthenticationStatus, useSignOut, useUserData } from '@nhost/vue'
-import { toast } from 'vue3-toastify'
+import { RouterLink, RouterView } from 'vue-router'
 import MSOIcon from '@/components/icons/MSOIcon.vue'
-
-const { isAuthenticated } = useAuthenticationStatus();
-const { signOut } = useSignOut();
-const router = useRouter();
-
-const doLogout = () => {
-  signOut();
-  router.push('/');
-  toast("You've been logged out.");
-}
-
-let userData = false;
-if (isAuthenticated) {
-  userData = useUserData();
-}
+import IconLogo from './components/icons/IconLogo.vue'
 </script>
 
 <template>
   <header>
     <nav>
-      <RouterLink to="/"><MSOIcon>home</MSOIcon> Home</RouterLink>
+      <RouterLink to="/"><IconLogo/> Home</RouterLink>
       <RouterLink to="/name"><MSOIcon>signature</MSOIcon> Name</RouterLink>
       <RouterLink to="/timer"><MSOIcon>timer</MSOIcon> Timer</RouterLink>
       <RouterLink to="/countdown"><MSOIcon>avg_pace</MSOIcon> Countdown</RouterLink>
-      <RouterLink to="/profile" v-if="isAuthenticated">
-        <img class="avatar" :src="userData.avatarUrl" :alt="userData.displayName" />
-        My overlays
-      </RouterLink>
-      <RouterLink to="/login" v-if="!isAuthenticated"><MSOIcon>login</MSOIcon> Login</RouterLink>
-      <a href="#" v-else v-on:click="doLogout()"><MSOIcon>logout</MSOIcon> Logout</a>
     </nav>
   </header>
 
@@ -96,6 +74,11 @@ nav {
     width: 30px;
     height: 30px;
     border-radius: 2em;
+  }
+  
+  svg {
+    width: 30px;
+    height: 30px;
   }
 }
 
